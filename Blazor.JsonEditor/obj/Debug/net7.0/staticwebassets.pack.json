@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\Temp\\Blazor.JsonEditor\\Blazor.JsonEditor\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Blazor.JsonEditor.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Blazor.JsonEditor.bundle.scp.css"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Blazor.JsonEditor.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Blazor.JsonEditor.props",
+      "PackagePath": "build\\Blazor.JsonEditor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Blazor.JsonEditor.props",
+      "PackagePath": "buildMultiTargeting\\Blazor.JsonEditor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Blazor.JsonEditor.props",
+      "PackagePath": "buildTransitive\\Blazor.JsonEditor.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

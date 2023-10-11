@@ -1,0 +1,96 @@
+﻿@using System.Text.Json
+
+<button type="button" @onclick="@(() => AddOrEdit())" class="j-btn">
+    @if (IsAddingOrEditing)
+    {
+        <i class="fas fa-minus"></i>
+    }
+    else
+    {
+        if (string.IsNullOrEmpty(EditingPropertyName))
+        {
+            <i class="fas fa-plus"></i>
+        }
+        else
+        {
+            <i class="fas fa-edit"></i>
+        }
+    }
+</button>
+
+@if (IsAddingOrEditing)
+{
+    <EditForm Model="JsonItem" OnValidSubmit="SaveNodeAsync">
+        <DataAnnotationsValidator />
+        <div class="new-item-container">
+            @if (ValidationMessage != null)
+            {
+                <div class="valid-c">
+                    @ValidationMessage
+                </div>
+            }
+            <div class="row">
+                @if (JsonItem.ValueKind != JsonValueKind.False && JsonItem.ValueKind != JsonValueKind.Null)
+                {
+                    <div class="col-6 p-2">
+                        <label>Property Name</label>
+                        @if (string.IsNullOrEmpty(EditingPropertyName))
+                        {
+                            <InputText @bind-Value="@JsonItem.PropertyName" class="j-txt" />
+                        }
+                        else
+                        {
+                            <InputText @bind-Value="@JsonItem.PropertyName" class="j-txt" readonly></InputText>
+                        }
+                        <ValidationMessage For="@(() => JsonItem.PropertyName)" />
+                    </div>
+                }
+                <div class="col-6 p-2">
+                    <label>Property Type</label>
+                    <InputSelect TValue="JsonValueKind" @bind-Value="JsonItem.ValueKind" class="j-txt">
+                        <option value="@JsonValueKind.String">String</option>
+                        <option value="@JsonValueKind.Number">Number</option>
+                        <option value="@JsonValueKind.Object">Object</option>
+                        <option value="@JsonValueKind.Array">Array</option>
+                        <option value="@JsonValueKind.True">Boolean</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => JsonItem.ValueKind)" />
+                </div>
+            </div>
+            <div>
+                <label>Value:</label>
+                @if (JsonItem.ValueKind == JsonValueKind.String || JsonItem.ValueKind == JsonValueKind.Array)
+                {
+                    <InputText @bind-Value="JsonItem.Value" class="j-txt" />
+                    <ValidationMessage For="@(() => JsonItem.Value)" />
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.Number)
+                {
+                    <InputNumber TValue="double?" @bind-Value="JsonItem.NumericValue" class="j-txt"></InputNumber>
+                    <ValidationMessage For="@(() => JsonItem.NumericValue)" />
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.True)
+                {
+                    <InputSelect TValue="string" @bind-Value="JsonItem.Value" class="j-txt">
+                        <option value=""></option>
+                        <option value="true">TRUE</option>
+                        <option value="false">FALSE</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => JsonItem.Value)" />
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.False && KeyValues?.Count > 0)
+                {
+                    <InputSelect TValue="string" @bind-Value="@JsonItem.Value" sclass="j-txt">
+                        <option value="default(string?)"></option>
+                        @foreach (var kv in KeyValues)
+                        {
+                            <option Value="kv.Value">@kv.Key</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(()  => JsonItem.Value)" />
+                }
+            </div>
+            <button type="submit" class="j-btn-l"><i class="fas fa-check-square"></i></button>
+        </div>
+    </EditForm>
+}

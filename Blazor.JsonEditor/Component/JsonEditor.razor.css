@@ -1,0 +1,87 @@
+﻿.json-content {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.j-btn {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    line-height: 1px;
+    font-family: 'Wingdings 2';
+    font-size: 10px;
+}
+
+.j-btn-l {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    line-height: 1px;
+    font-family: 'Wingdings 2';
+    font-size: 14px;
+}
+
+.j-btn-primary {
+    color: darkblue;
+}
+
+.j-btn-danger {
+    color: red;
+}
+
+.j-txt {
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    line-height: 1.2em;
+}
+
+.j-btn-right {
+    position: relative;
+    margin-right: 0px;
+    margin-left: auto;
+    display: block;
+    margin-top: -23px;
+}
+
+.valid-c {
+    color: red;
+}
+
+.property-name {
+    padding: 3px;
+    color: brown;
+}
+
+.d-btn {
+    padding: 2px;
+    font-size: 9px;
+    line-height: 1px;
+    color: red;
+}
+
+.value-content {
+    padding: 3px;
+    font-style: italic;
+}
+
+.value-string {
+    color: darkgoldenrod;
+}
+
+.value-number {
+    color: blueviolet;
+}
+
+.value-null {
+    color: darkred;
+}
+
+.value-array {
+    color: darkgreen;
+}
+
+.value-boolean {
+    color: chocolate;
+}
