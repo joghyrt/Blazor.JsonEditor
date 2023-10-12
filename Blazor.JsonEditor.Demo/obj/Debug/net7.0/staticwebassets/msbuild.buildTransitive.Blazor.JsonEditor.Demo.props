@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Blazor.JsonEditor.Demo.props" />
-</Project>
