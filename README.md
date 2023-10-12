@@ -5,7 +5,7 @@ Json editor for Blazor Server App. Rewrited and working version of **[Blazoring.
 
 * To install the package run following command:
 
-**`Install-Package Blazoring.JsonEditor`**
+**`Install-Package Blazor.JsonEditor`**
 or search **Blazor.JsonEditor** in Nuget gallery.
 
 This will install Blazor.JsonEditor in your project. You also need to add in **_Imports.razor**:
@@ -31,5 +31,3 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 ```
 
 Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
-
-You can see [live sample here](https://peaceful-golick-f36338.netlify.com/)
