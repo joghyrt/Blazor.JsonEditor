@@ -1,7 +1,7 @@
 # Blazor.JsonEditor
-Json editor for Blazor Server App. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
+Json Editor and Viewer for Blazor Server App. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
 
-## Json Editor tool
+## Json Editor and Viewer tool
 
 * To install the package run following command:
 
@@ -22,7 +22,7 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 ```
 
-### Using in code:
+### Using in code to have an editor:
 
 ```html
 <EditForm Model="DemoJson">
@@ -30,4 +30,14 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 </EditForm>
 ```
 
+### Using in code to have a viewer:
+
+```html
+<EditForm Model="DemoJson">
+    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" AllowEdit="false"></JsonEditor>
+</EditForm>
+```
+
 Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
+
+[Buy me a coffee](https://www.buymeacoffee.com/joghyrt)

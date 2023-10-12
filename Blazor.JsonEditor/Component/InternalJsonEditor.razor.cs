@@ -19,6 +19,9 @@ namespace Blazor.JsonEditor.Component
 
         [Parameter]
         public Dictionary<string, string>? KeyValues { get; set; }
+        
+        [Parameter] 
+        public bool AllowEdit { get; set; } = true;
 
         private JsonObject? Json { get; set; }
 

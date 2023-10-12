@@ -20,7 +20,7 @@
                     <span>
                         <span>{</span>
                         <InternalJsonEditor Value="@jsonItem.Value.ToJsonString()"
-                                            ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" KeyValues="KeyValues">
+                                            ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" KeyValues="KeyValues" AllowEdit="AllowEdit">
                         </InternalJsonEditor>
                         <span>}</span>
                     </span>
@@ -31,25 +31,37 @@
                     <span>,</span>
                 }
                 
-                @if (!JsonHelper.IsInJsonValueKind(jsonItem, new List<JsonValueKind> { JsonValueKind.Object }))
+                @if (!JsonHelper.IsObjectValueKind(jsonItem) && this.AllowEdit)
                 {
                     <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
                                     EditingPropertyName="@jsonItem.Key">
                     </JsonItemEditor>
                 }
-                <span>
-                    <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(jsonItem.Key))">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </span>
+                
+                @if (this.AllowEdit)
+                {
+                    <span>
+                        <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(jsonItem.Key))">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </span>
+                }
             </div>
         }
-        <div>
-            <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
-        </div>
+        @if (this.AllowEdit)
+        {
+            <div>
+                <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
+            </div>
+        }
     </div>
 }
 else
 {
-    <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
+    @if (this.AllowEdit)
+    {
+        <div>
+            <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
+        </div>
+    }
 }

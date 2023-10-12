@@ -17,6 +17,8 @@ namespace Blazor.JsonEditor.Component
         [Parameter] public Expression<Func<string?>>? ValidationFor { get; set; }
         [Parameter] public string? FieldName { get; set; }
 
+        [Parameter] public bool AllowEdit { get; set; } = true;
+
         private JsonObject? Json { get; set; }
 
         protected override async Task OnParametersSetAsync()
