@@ -8,36 +8,33 @@
 
 <div class="json-content">
     <span>{</span>
-    <button type="button" class="j-btn-l j-btn-right" @onclick="CopyToClipboard">
-        <i class="fas fa-copy"></i>
-    </button>
     @if (Json != null)
     {
-        <div style="margin-left:20px; min-width:500px">
+        <div class="json-object-body">
             @foreach (var value in Json)
             {
                 <div>
                     @if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Number, JsonValueKind.True, JsonValueKind.False, JsonValueKind.Null }))
                     {
-                        <span class="property-name">"@value.Key"</span>
+                        <span class="json-property-name">"@value.Key"</span>
                         <span>:</span>
-                        <span class="value-content value-number">@value.Value.ToString()</span>
+                        <span class="json-value-content json-value-number">@value.Value.ToString()</span>
                     }
                     else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.String }))
                     {
-                        <span class="property-name">"@value.Key"</span>
+                        <span class="json-property-name">"@value.Key"</span>
                         <span>:</span>
-                        <span class="value-content value-string">"@value.Value.ToString()"</span>
+                        <span class="json-value-content json-value-string">"@value.Value.ToString()"</span>
                     }
                     else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Array }))
                     {
-                        <span class="property-name">"@value.Key"</span>
+                        <span class="json-property-name">"@value.Key"</span>
                         <span>:</span>
-                        <span class="value-content value-array">@value.Value.ToJsonString()</span>
+                        <span class="json-value-content json-value-array">@value.Value.ToJsonString()</span>
                     }
                     else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Object }))
                     {
-                        <span class="property-name">"@value.Key"</span>
+                        <span class="json-property-name">"@value.Key"</span>
                         <span>:</span>
                         <span>
                             <span>{</span>
@@ -58,7 +55,7 @@
                         </JsonItemEditor>
                     }
                     <span>
-                        <button type="button" class="j-btn j-btn-danger" @onclick="@(() => RemoveValue(value.Key))">
+                        <button type="button" class="json-btn json-btn-danger" @onclick="@(() => RemoveValue(value.Key))">
                             <i class="fas fa-times"></i>
                         </button>
                     </span>
@@ -71,7 +68,7 @@
     }
     else
     {
-        <div style="margin-left:20px;">
+        <div class="json-object-body-empty">
             <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
         </div>
     }

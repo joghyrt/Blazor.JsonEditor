@@ -3,7 +3,26 @@
     border: 1px solid #ccc;
 }
 
-.j-btn {
+.json-object-body {
+    margin-left:20px; 
+    min-width:500px
+}
+
+.json-object-body-empty {
+    margin-left:20px;
+}
+
+.json-property-name {
+    padding: 3px;
+    color: brown;
+}
+
+.json-value-content {
+    padding: 3px;
+    font-style: italic;
+}
+
+.json-btn {
     padding: 4px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -12,7 +31,7 @@
     font-size: 10px;
 }
 
-.j-btn-l {
+.json-btn-submit {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -21,15 +40,11 @@
     font-size: 14px;
 }
 
-.j-btn-primary {
-    color: darkblue;
-}
-
-.j-btn-danger {
+.json-btn-danger {
     color: red;
 }
 
-.j-txt {
+.json-input-text {
     padding: 2px 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -37,51 +52,27 @@
     line-height: 1.2em;
 }
 
-.j-btn-right {
-    position: relative;
-    margin-right: 0px;
-    margin-left: auto;
-    display: block;
-    margin-top: -23px;
-}
-
-.valid-c {
+.json-validation-error {
     color: red;
 }
 
-.property-name {
-    padding: 3px;
-    color: brown;
-}
-
-.d-btn {
-    padding: 2px;
-    font-size: 9px;
-    line-height: 1px;
-    color: red;
-}
-
-.value-content {
-    padding: 3px;
-    font-style: italic;
-}
-
-.value-string {
+.json-value-string {
     color: darkgoldenrod;
 }
 
-.value-number {
+.json-value-number {
     color: blueviolet;
 }
 
-.value-null {
-    color: darkred;
-}
-
-.value-array {
+.json-value-array {
     color: darkgreen;
 }
 
-.value-boolean {
-    color: chocolate;
+.json-new-item-form-container {
+    background: #fff;
+    border: 1px solid #808080;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #1d1d1d;
+    width: 400px;
 }

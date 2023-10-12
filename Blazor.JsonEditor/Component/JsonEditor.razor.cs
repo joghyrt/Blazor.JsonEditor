@@ -70,10 +70,5 @@ namespace Blazor.JsonEditor.Component
                 StateHasChanged();
             }
         }
-
-        private async Task CopyToClipboard()
-        {
-            await JS.InvokeAsync<string?>("CopyToClipboard", new object[] { Value });
-        }
     }
 }
