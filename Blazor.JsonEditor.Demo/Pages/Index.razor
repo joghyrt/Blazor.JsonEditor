@@ -7,6 +7,10 @@
 
 <h1>Blazor.JsonEditor Demo</h1>
 
+<div>
+    <textarea disabled="disabled" style="width: 100%; min-height: 200px;">@DemoJson.Json</textarea>
+</div>
+
 <EditForm Model="DemoJson">
     <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)"></JsonEditor>
 </EditForm>

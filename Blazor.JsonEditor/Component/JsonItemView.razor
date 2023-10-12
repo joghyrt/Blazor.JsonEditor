@@ -1,0 +1,28 @@
+﻿@using System.Text.Json
+@using Blazor.JsonEditor.Helper
+
+
+@if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonValueKind.Number, JsonValueKind.True, JsonValueKind.False }))
+{
+    <span class="json-property-name">"@JsonItem.Key"</span>
+    <span>:</span>
+    <span class="json-value-content json-value-number">@JsonItem.Value.ToString()</span>
+}
+else if (JsonItem.Value == null)
+{
+    <span class="json-property-name">"@JsonItem.Key"</span>
+    <span>:</span>
+    <span class="json-value-content json-value-number">null</span>
+}
+else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonValueKind.String }))
+{
+    <span class="json-property-name">"@JsonItem.Key"</span>
+    <span>:</span>
+    <span class="json-value-content json-value-string">"@JsonItem.Value.ToString()"</span>
+}
+else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonValueKind.Array }))
+{
+    <span class="json-property-name">"@JsonItem.Key"</span>
+    <span>:</span>
+    <span class="json-value-content json-value-array">@JsonItem.Value.ToJsonString()</span>
+}

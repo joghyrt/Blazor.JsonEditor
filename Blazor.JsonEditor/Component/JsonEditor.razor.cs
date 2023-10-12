@@ -49,26 +49,30 @@ namespace Blazor.JsonEditor.Component
 
         private void JsonObjectUpdated(string prop, string value)
         {
-            if (Json != null)
+            if (Json == null)
             {
-                Json[prop] = JsonNode.Parse(value);
-                TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
-                ValueChanged.InvokeAsync(JsonObjectString);
-                EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
-                StateHasChanged();
+                return;
             }
+            
+            Json[prop] = JsonNode.Parse(value);
+            TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
+            ValueChanged.InvokeAsync(JsonObjectString);
+            EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
+            StateHasChanged();
         }
 
         private void RemoveValue(string prop)
         {
-            if (Json != null)
+            if (Json == null)
             {
-                Json.Remove(prop);
-                TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
-                ValueChanged.InvokeAsync(JsonObjectString);
-                EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
-                StateHasChanged();
+                return;
             }
+            
+            Json.Remove(prop);
+            TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
+            ValueChanged.InvokeAsync(JsonObjectString);
+            EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
+            StateHasChanged();
         }
     }
 }

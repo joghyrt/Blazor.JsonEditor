@@ -7,7 +7,7 @@
     }
     else
     {
-        if (string.IsNullOrEmpty(EditingPropertyName))
+        if (!IsEdit)
         {
             <i class="fas fa-plus"></i>
         }
@@ -21,7 +21,7 @@
 @if (IsAddingOrEditing)
 {
     <EditForm Model="JsonItem" OnValidSubmit="SaveNodeAsync">
-        <DataAnnotationsValidator />
+        <DataAnnotationsValidator/>
         <div class="json-new-item-form-container">
             @if (ValidationMessage != null)
             {
@@ -30,21 +30,11 @@
                 </div>
             }
             <div class="row">
-                @if (JsonItem.ValueKind != JsonValueKind.False && JsonItem.ValueKind != JsonValueKind.Null)
-                {
-                    <div class="p-2">
-                        <label>Property Name</label>
-                        @if (string.IsNullOrEmpty(EditingPropertyName))
-                        {
-                            <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" />
-                        }
-                        else
-                        {
-                            <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" readonly></InputText>
-                        }
-                        <ValidationMessage For="@(() => JsonItem.PropertyName)" />
-                    </div>
-                }
+                <div class="p-2">
+                    <label>Property Name</label>
+                    <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" disabled=@IsEdit></InputText>
+                    <ValidationMessage For="@(() => JsonItem.PropertyName)"/>
+                </div>
                 <div class="p-2">
                     <label>Property Type</label>
                     <InputSelect TValue="JsonValueKind" @bind-Value="JsonItem.ValueKind" class="json-input-text">
@@ -53,30 +43,33 @@
                         <option value="@JsonValueKind.Object">Object</option>
                         <option value="@JsonValueKind.Array">Array</option>
                         <option value="@JsonValueKind.True">Boolean</option>
+                        <option value="@JsonValueKind.Undefined">Null</option>
                     </InputSelect>
-                    <ValidationMessage For="@(() => JsonItem.ValueKind)" />
+                    <ValidationMessage For="@(() => JsonItem.ValueKind)"/>
                 </div>
             </div>
             <div>
-                <label>Value:</label>
+                @if (JsonItem.ValueKind != JsonValueKind.Undefined)
+                {
+                    <label>Value:</label>
+                }
                 @if (JsonItem.ValueKind == JsonValueKind.String || JsonItem.ValueKind == JsonValueKind.Array)
                 {
-                    <InputText @bind-Value="JsonItem.Value" class="json-input-text" />
-                    <ValidationMessage For="@(() => JsonItem.Value)" />
+                    <InputText @bind-Value="JsonItem.Value" class="json-input-text"/>
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
                 }
                 else if (JsonItem.ValueKind == JsonValueKind.Number)
                 {
                     <InputNumber TValue="double?" @bind-Value="JsonItem.NumericValue" class="json-input-text"></InputNumber>
-                    <ValidationMessage For="@(() => JsonItem.NumericValue)" />
+                    <ValidationMessage For="@(() => JsonItem.NumericValue)"/>
                 }
                 else if (JsonItem.ValueKind == JsonValueKind.True)
                 {
                     <InputSelect TValue="string" @bind-Value="JsonItem.Value" class="json-input-text">
-                        <option value=""></option>
-                        <option value="true">TRUE</option>
-                        <option value="false">FALSE</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
                     </InputSelect>
-                    <ValidationMessage For="@(() => JsonItem.Value)" />
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
                 }
                 else if (JsonItem.ValueKind == JsonValueKind.False && KeyValues?.Count > 0)
                 {
@@ -87,10 +80,12 @@
                             <option Value="kv.Value">@kv.Key</option>
                         }
                     </InputSelect>
-                    <ValidationMessage For="@(()  => JsonItem.Value)" />
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
                 }
             </div>
-            <button type="submit" class="json-button-submit"><i class="fas fa-check-square"></i></button>
+            <button type="submit" class="json-button-submit">
+                <i class="fas fa-check-square"></i>
+            </button>
         </div>
     </EditForm>
 }

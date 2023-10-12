@@ -3,8 +3,6 @@
 @using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
 
-
-
 @inherits InputBase<string?>
 @inject IJSRuntime JS
 
@@ -13,51 +11,39 @@
     @if (Json != null)
     {
         <div class="json-object-body">
-            @foreach (var value in Json)
+            @foreach (var jsonItem in Json)
             {
                 <div>
-                    @if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Number, JsonValueKind.True, JsonValueKind.False, JsonValueKind.Null }))
+                    @if (!JsonHelper.IsObjectValueKind(jsonItem))
                     {
-                        <span class="json-property-name">"@value.Key"</span>
-                        <span>:</span>
-                        <span class="json-value-content json-value-number">@value.Value.ToString()</span>
+                        <JsonItemView JsonItem="jsonItem"></JsonItemView>
                     }
-                    else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.String }))
+                    else
                     {
-                        <span class="json-property-name">"@value.Key"</span>
-                        <span>:</span>
-                        <span class="json-value-content json-value-string">"@value.Value.ToString()"</span>
-                    }
-                    else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Array }))
-                    {
-                        <span class="json-property-name">"@value.Key"</span>
-                        <span>:</span>
-                        <span class="json-value-content json-value-array">@value.Value.ToJsonString()</span>
-                    }
-                    else if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Object }))
-                    {
-                        <span class="json-property-name">"@value.Key"</span>
+                        <span class="json-property-name">"@jsonItem.Key"</span>
                         <span>:</span>
                         <span>
                             <span>{</span>
-                            <InternalJsonEditor Value="@value.Value.ToJsonString()"
-                                                ValueChanged="@(e => JsonObjectUpdated(value.Key, e))" KeyValues="KeyValues">
+                            <InternalJsonEditor Value="@jsonItem.Value.ToJsonString()"
+                                                ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" KeyValues="KeyValues">
                             </InternalJsonEditor>
                             <span>}</span>
                         </span>
                     }
-                    @if (Json.LastOrDefault().Key != value.Key)
+                    
+                    @if (Json.LastOrDefault().Key != jsonItem.Key)
                     {
                         <span>,</span>
                     }
-                    @if (!JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Object }))
+
+                    @if (!JsonHelper.IsObjectValueKind(jsonItem))
                     {
                         <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
-                                        EditingPropertyName="@value.Key">
+                                        EditingPropertyName="@jsonItem.Key">
                         </JsonItemEditor>
                     }
                     <span>
-                        <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(value.Key))">
+                        <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(jsonItem.Key))">
                             <i class="fas fa-times"></i>
                         </button>
                     </span>

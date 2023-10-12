@@ -16,5 +16,17 @@ namespace Blazor.JsonEditor.Helper
 
             return jsonValueKinds.Any(x => jsonElement.ValueKind.Equals(x));
         }
+        
+        internal static bool IsObjectValueKind(KeyValuePair<string, JsonNode?> jsonObjectValue)
+        {
+            if (jsonObjectValue.Value == null)
+            {
+                return false;
+            }
+
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(jsonObjectValue.Value.ToJsonString());
+
+            return jsonElement.ValueKind.Equals(JsonValueKind.Object);
+        }
     }
 }

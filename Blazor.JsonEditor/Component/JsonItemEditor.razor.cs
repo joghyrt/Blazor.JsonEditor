@@ -20,6 +20,15 @@ namespace Blazor.JsonEditor.Component
         [Parameter] public string? EditingPropertyName { get; set; }
 
         private bool IsAddingOrEditing;
+
+        private bool IsEdit
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(EditingPropertyName);
+            }
+        }
+
         private string? ValidationMessage;
 
         private JsonItem? JsonItem { get; set; }
@@ -36,6 +45,7 @@ namespace Blazor.JsonEditor.Component
             JsonItem = new JsonItem();
             if (EditingPropertyName == null)
             {
+                JsonItem.ValueKind = JsonValueKind.Undefined;
                 return;
             }
 
@@ -47,11 +57,15 @@ namespace Blazor.JsonEditor.Component
             JsonItem.PropertyName = EditingPropertyName;
 
             var jsonObjectValue = JsonObject?.FirstOrDefault(x => x.Key.Equals(EditingPropertyName)).Value;
-            
-            
-            var jsonElement = JsonSerializer.Deserialize<JsonElement>(jsonObjectValue.ToJsonString());
 
-            JsonItem.ValueKind = jsonElement.ValueKind;
+            var jsonElement = new JsonElement();
+            
+            if (jsonObjectValue != null)
+            {
+                jsonElement = JsonSerializer.Deserialize<JsonElement>(jsonObjectValue.ToJsonString());
+                JsonItem.ValueKind = jsonElement.ValueKind;
+            }
+            
             switch (jsonElement.ValueKind)
             {
                 case JsonValueKind.String:
@@ -96,7 +110,7 @@ namespace Blazor.JsonEditor.Component
                     return;
                 }
                 
-                if (string.IsNullOrWhiteSpace(EditingPropertyName))
+                if (!this.IsEdit)
                 {
                     this.AddNode();
                 }
