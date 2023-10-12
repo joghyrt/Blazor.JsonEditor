@@ -3,6 +3,8 @@
 @using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
 
+
+
 @inherits InputBase<string?>
 @inject IJSRuntime JS
 
@@ -55,7 +57,7 @@
                         </JsonItemEditor>
                     }
                     <span>
-                        <button type="button" class="json-btn json-btn-danger" @onclick="@(() => RemoveValue(value.Key))">
+                        <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(value.Key))">
                             <i class="fas fa-times"></i>
                         </button>
                     </span>

@@ -2,6 +2,7 @@
 @using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
 
+
 @if (Json != null)
 {
     <div class="json-object-body">
@@ -43,14 +44,14 @@
                 {
                     <span>,</span>
                 }
-                @if (JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Object }))
+                @if (!JsonHelper.IsInJsonValueKind(value, new List<JsonValueKind> { JsonValueKind.Object }))
                 {
                     <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
                                     EditingPropertyName="@value.Key">
                     </JsonItemEditor>
                 }
                 <span>
-                    <button type="button" class="json-btn json-btn-danger" @onclick="@(() => RemoveValue(value.Key))">
+                    <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(value.Key))">
                         <i class="fas fa-times"></i>
                     </button>
                 </span>

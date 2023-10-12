@@ -1,10 +1,10 @@
-﻿.json-content {
+.json-content {
     padding: 5px;
     border: 1px solid #ccc;
 }
 
 .json-object-body {
-    margin-left:20px; 
+    margin-left:20px;
     min-width:500px
 }
 

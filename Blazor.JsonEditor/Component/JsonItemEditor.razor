@@ -1,6 +1,6 @@
 ﻿@using System.Text.Json
 
-<button type="button" @onclick="@(() => AddOrEdit())" class="j-btn">
+<button type="button" @onclick="@(() => AddOrEdit())" class="json-button">
     @if (IsAddingOrEditing)
     {
         <i class="fas fa-minus"></i>
@@ -90,7 +90,7 @@
                     <ValidationMessage For="@(()  => JsonItem.Value)" />
                 }
             </div>
-            <button type="submit" class="json-btn-submit"><i class="fas fa-check-square"></i></button>
+            <button type="submit" class="json-button-submit"><i class="fas fa-check-square"></i></button>
         </div>
     </EditForm>
 }
