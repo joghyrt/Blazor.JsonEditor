@@ -1,0 +1,20 @@
+﻿@page "/"
+
+@using Blazor.JsonEditor.Demo.Wasm.Model
+
+<PageTitle>Index</PageTitle>
+
+<div>
+    <h4>Json Viewer</h4>
+    <span>You can easily make json viewer from json editor. Just pass AllowEdit="false"</span>
+    <EditForm Model="DemoJson">
+        <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" AllowEdit="false"></JsonEditor>
+    </EditForm>
+</div>
+<div>
+    <h4>Json Editor</h4>
+    <span>Here is json editor. If you find any bugs or you would like to see any improvements please contact me <a href="https://github.com/joghyrt/Blazor.JsonEditor" target="_blank">here</a></span>
+    <EditForm Model="DemoJson">
+        <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)"></JsonEditor>
+    </EditForm>
+</div>
