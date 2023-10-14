@@ -1,5 +1,5 @@
 # Blazor.JsonEditor
-Json Editor and Viewer for Blazor Server App. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
+Json Editor and Viewer for Blazor Server App and Wasm. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
 
 ## Json Editor and Viewer tool
 
@@ -12,12 +12,12 @@ This will install Blazor.JsonEditor in your project. You also need to add in **_
 ```html
 @using Blazor.JsonEditor.Component
 ```
-Also, you need to add javascript file in _Host.cshtml file:
+Also, you need to add javascript file in _Host.cshtml ( Server app) or index.html ( Wasm)  file:
 
 ```html
 <script src="_content/Blazor.JsonEditor/Blazor.JsonEditor.js"></script>
 ```
-For icons suppor JsonEditor uses Font-Awesome icons library. You need to add link to _Host.cshtml file:
+For icons suppor JsonEditor uses Font-Awesome icons library. You need to add link to _Host.cshtml ( Server app) or index.html ( Wasm) file:
 ```html
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 ```
