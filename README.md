@@ -3,7 +3,7 @@ Json Editor and Viewer for Blazor Server App and Wasm. Rewrited and working vers
 
 ### Demo:
 
-[Click me to see the demo](https://www.buymeacoffee.com/joghyrt](https://652a73a4fdf1211e843f77fd--wondrous-genie-896870.netlify.app/)
+[Click me to see the demo](https://652a73a4fdf1211e843f77fd--wondrous-genie-896870.netlify.app)
 
 ## Json Editor and Viewer tool
 
