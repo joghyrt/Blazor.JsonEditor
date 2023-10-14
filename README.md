@@ -1,6 +1,10 @@
 # Blazor.JsonEditor
 Json Editor and Viewer for Blazor Server App and Wasm. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
 
+### Demo:
+
+[Click me to see the demo]([https://www.buymeacoffee.com/joghyrt](https://652a73a4fdf1211e843f77fd--wondrous-genie-896870.netlify.app/))
+
 ## Json Editor and Viewer tool
 
 * To install the package run following command:
@@ -40,10 +44,14 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 
 Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
 
+### Donation:
+
 [Buy me a coffee](https://www.buymeacoffee.com/joghyrt)
 
-
 <img width="120" alt="bmc_qr" src="https://github.com/joghyrt/Blazor.JsonEditor/assets/26901105/d914e23c-dc90-483b-98df-e977c6662672">
+
+
+
 
 
 
