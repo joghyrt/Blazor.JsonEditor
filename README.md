@@ -44,7 +44,7 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 
 Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
 
-### Donation:
+### If you like it please suuport:
 
 [Buy me a coffee](https://www.buymeacoffee.com/joghyrt)
 
