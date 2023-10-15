@@ -1,0 +1,97 @@
+﻿@using System.Text.Json
+
+
+<button type="button" @onclick="ToggleEditor" class="json-button">
+    @if (!IsEditMode)
+    {
+        <i class="fa fa-plus"></i>
+    }
+    else
+    {
+        <i class="fa fa-pen-to-square"></i>
+    }
+
+</button>
+
+@if (IsShowEditor)
+{
+    <EditForm Model="JsonItem" OnValidSubmit="SaveNodeAsync">
+        <DataAnnotationsValidator/>
+        <div class="json-new-item-form-container">
+            @if (ValidationMessage != null)
+            {
+                <div class="json-validation-error">
+                    @ValidationMessage
+                </div>
+            }
+            <div class="row">
+                <div class="p-2 json-input-group">
+                    <label>Property Name</label>
+                    <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" disabled=@IsEditMode></InputText>
+                    <ValidationMessage For="@(() => JsonItem.PropertyName)"/>
+                </div>
+                <div class="p-2 json-input-group">
+                    <label>Property Type</label>
+                    <InputSelect TValue="JsonValueKind" @bind-Value="JsonItem.ValueKind" class="json-input-text">
+                        <option value="@JsonValueKind.String">String</option>
+                        <option value="@JsonValueKind.Number">Number</option>
+                        <option value="@JsonValueKind.Object">Object</option>
+                        <option value="@JsonValueKind.Array">Array</option>
+                        <option value="@JsonValueKind.True">Boolean</option>
+                        <option value="@JsonValueKind.Undefined">Null</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => JsonItem.ValueKind)"/>
+                </div>
+            </div>
+            <div>
+                @if (JsonItem.ValueKind != JsonValueKind.Undefined)
+                {
+                    <label>Value:</label>
+                }
+                @if (JsonItem.ValueKind == JsonValueKind.String || JsonItem.ValueKind == JsonValueKind.Array)
+                {
+                    <InputText @bind-Value="JsonItem.Value" class="json-input-text"/>
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.Number)
+                {
+                    <InputNumber TValue="double?" @bind-Value="JsonItem.NumericValue" class="json-input-text"></InputNumber>
+                    <ValidationMessage For="@(() => JsonItem.NumericValue)"/>
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.True)
+                {
+                    <InputSelect TValue="string" @bind-Value="JsonItem.Value" class="json-input-text">
+                        <option></option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
+                }
+                else if (JsonItem.ValueKind == JsonValueKind.False && KeyValues?.Count > 0)
+                {
+                    <InputSelect TValue="string" @bind-Value="@JsonItem.Value" sclass="json-input-text">
+                        <option value="default(string?)"></option>
+                        @foreach (var kv in KeyValues)
+                        {
+                            <option Value="kv.Value">@kv.Key</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
+                }
+            </div>
+            <div class="json-button-container">
+                <button type="submit" class="json-button-submit">
+                    <i class="fas fa-check-square"></i>
+                </button>
+                @if (JsonItemToEdit != null)
+                {
+                    <span>
+                        <button type="button" class="json-button json-button-danger json-button-delete" @onclick="RemoveNode">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </span>
+                }
+            </div>
+        </div>
+    </EditForm>
+}

@@ -2,6 +2,8 @@
 @using System.Linq.Expressions
 @using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
+@using Blazor.JsonEditor.Component.Editor
+@using Blazor.JsonEditor.Component.Viewer
 
 @inherits InputBase<string?>
 @inject IJSRuntime JS
@@ -27,7 +29,8 @@
                             <InternalJsonEditor Value="@jsonItem.Value.ToJsonString()"
                                                 ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" 
                                                 KeyValues="KeyValues"
-                                                AllowEdit="AllowEdit">
+                                                AllowEdit="AllowEdit"
+                                                CustomEditor="CustomEditor">
                             </InternalJsonEditor>
                             <span>}</span>
                         </span>
@@ -38,27 +41,18 @@
                         <span>,</span>
                     }
 
-                    @if (!JsonHelper.IsObjectValueKind(jsonItem) && this.AllowEdit)
-                    {
-                        <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
-                                        EditingPropertyName="@jsonItem.Key">
-                        </JsonItemEditor>
-                    }
-                    
                     @if (this.AllowEdit)
                     {
-                        <span>
-                            <button type="button" class="json-button json-button-danger" @onclick="@(() => RemoveValue(jsonItem.Key))">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </span>
+                        <JsonItemEditor JsonObject="Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
+                                        JsonItemToEdit="jsonItem" Component="CustomEditor">
+                        </JsonItemEditor>
                     }
                 </div>
             }
             @if (this.AllowEdit)
             {
                 <div>
-                    <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
+                    <JsonItemEditor JsonObject="Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues" Component="CustomEditor"></JsonItemEditor>
                 </div>
             }
         </div>
@@ -68,7 +62,7 @@
         @if (this.AllowEdit)
         {
             <div class="json-object-body-empty">
-                <JsonItemEditor JsonObject="@Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"></JsonItemEditor>
+                <JsonItemEditor JsonObject="Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues" Component="CustomEditor"></JsonItemEditor>
             </div>
         }
     }

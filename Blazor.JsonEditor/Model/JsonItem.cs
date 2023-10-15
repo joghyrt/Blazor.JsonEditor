@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Blazor.JsonEditor.Model
 {
-    internal class JsonItem
+    public class JsonItem
     {
         [RequiredIf(nameof(JsonItem.ValueKind), JsonValueKind.Undefined, JsonValueKind.Number, JsonValueKind.String,
             JsonValueKind.Object, JsonValueKind.Array, JsonValueKind.True)]

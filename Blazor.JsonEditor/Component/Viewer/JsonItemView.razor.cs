@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Components;
 
-namespace Blazor.JsonEditor.Component
+namespace Blazor.JsonEditor.Component.Viewer
 {
     public partial class JsonItemView
     {

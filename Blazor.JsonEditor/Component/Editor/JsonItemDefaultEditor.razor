@@ -1,13 +1,15 @@
 ﻿@using System.Text.Json
+@using Blazor.JsonEditor.Helper
 
-<button type="button" @onclick="@(() => AddOrEdit())" class="json-button">
-    @if (IsAddingOrEditing)
+
+<button type="button" @onclick="@(() => ToggleEditor())" class="json-button">
+    @if (IsShowEditor)
     {
         <i class="fas fa-minus"></i>
     }
     else
     {
-        if (!IsEdit)
+        if (!IsEditMode)
         {
             <i class="fas fa-plus"></i>
         }
@@ -18,7 +20,7 @@
     }
 </button>
 
-@if (IsAddingOrEditing)
+@if (IsShowEditor)
 {
     <EditForm Model="JsonItem" OnValidSubmit="SaveNodeAsync">
         <DataAnnotationsValidator/>
@@ -32,7 +34,7 @@
             <div class="row">
                 <div class="p-2">
                     <label>Property Name</label>
-                    <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" disabled=@IsEdit></InputText>
+                    <InputText @bind-Value="@JsonItem.PropertyName" class="json-input-text" disabled=@IsEditMode></InputText>
                     <ValidationMessage For="@(() => JsonItem.PropertyName)"/>
                 </div>
                 <div class="p-2">
@@ -66,6 +68,7 @@
                 else if (JsonItem.ValueKind == JsonValueKind.True)
                 {
                     <InputSelect TValue="string" @bind-Value="JsonItem.Value" class="json-input-text">
+                        <option></option>
                         <option value="true">True</option>
                         <option value="false">False</option>
                     </InputSelect>
@@ -88,4 +91,13 @@
             </button>
         </div>
     </EditForm>
+}
+
+@if (JsonItemToEdit != null)
+{
+    <span>
+        <button type="button" class="json-button json-button-danger" @onclick="RemoveNode">
+            <i class="fas fa-times"></i>
+        </button>
+    </span>
 }
