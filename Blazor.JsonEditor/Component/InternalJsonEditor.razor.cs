@@ -24,6 +24,12 @@ namespace Blazor.JsonEditor.Component
         public bool AllowEdit { get; set; } = true;
         
         [Parameter] public Type? CustomEditor { get; set; }
+        
+        [Parameter] 
+        public Type? CustomItemView { get; set; }
+        
+        [Parameter] 
+        public Type? CustomObjectView { get; set; }
 
         private JsonObject? Json { get; set; }
 

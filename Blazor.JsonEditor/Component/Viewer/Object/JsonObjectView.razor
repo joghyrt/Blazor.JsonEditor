@@ -1,0 +1,10 @@
+﻿@{
+    if (Component != null)
+    {
+        <DynamicComponent Type="Component" Parameters="DynamicComponentParameters"></DynamicComponent>
+    }
+    else
+    {
+        <JsonObjectDefaultView JsonItem="JsonItem" AllowEdit="AllowEdit" ValueChanged="ValueChanged" KeyValues="KeyValues" CustomEditor="CustomEditor" CustomItemView="CustomItemView"></JsonObjectDefaultView>
+    }
+}

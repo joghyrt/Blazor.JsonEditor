@@ -12,7 +12,8 @@
     <Copyright>MIT</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.5</Version>
+    <PackageReleaseNotes>Item view and object view customization added</PackageReleaseNotes>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,6 +45,10 @@
   <ItemGroup>
     <None Update="Component/*.razor.css" CssScope="inherit-scope" />
     <None Update="Component/*.razor" CssScope="inherit-scope" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Component\Viewer\Body\JsonBodyView.razor" />
   </ItemGroup>
   
 </Project>

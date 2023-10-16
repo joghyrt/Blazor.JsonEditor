@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Components;
 
-namespace Blazor.JsonEditor.Component.Viewer
+namespace Blazor.JsonEditor.Demo.Wasm.Component
 {
-    public partial class JsonItemView
+    public partial class JsonItemCustomView
     {
         [Parameter]
         public KeyValuePair<string, JsonNode?> JsonItem { get; set; }

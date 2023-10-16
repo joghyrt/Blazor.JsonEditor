@@ -3,7 +3,8 @@
 @using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
 @using Blazor.JsonEditor.Component.Editor
-@using Blazor.JsonEditor.Component.Viewer
+@using Blazor.JsonEditor.Component.Viewer.Object
+@using Blazor.JsonEditor.Component.Viewer.Item
 
 @inherits InputBase<string?>
 @inject IJSRuntime JS
@@ -18,33 +19,31 @@
                 <div>
                     @if (!JsonHelper.IsObjectValueKind(jsonItem))
                     {
-                        <JsonItemView JsonItem="jsonItem"></JsonItemView>
+                        <JsonItemView JsonItem="jsonItem" Component="CustomItemView"></JsonItemView>
                     }
                     else
                     {
-                        <span class="json-property-name">"@jsonItem.Key"</span>
-                        <span>:</span>
-                        <span>
-                            <span>{</span>
-                            <InternalJsonEditor Value="@jsonItem.Value.ToJsonString()"
-                                                ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" 
-                                                KeyValues="KeyValues"
-                                                AllowEdit="AllowEdit"
-                                                CustomEditor="CustomEditor">
-                            </InternalJsonEditor>
-                            <span>}</span>
-                        </span>
+                        <JsonObjectView AllowEdit="AllowEdit" 
+                                        CustomEditor="CustomEditor" 
+                                        JsonItem="jsonItem" 
+                                        KeyValues="KeyValues" 
+                                        ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))" 
+                                        Component="CustomObjectView"
+                                        CustomItemView="CustomItemView"></JsonObjectView>
                     }
 
-                    @if (Json.LastOrDefault().Key != jsonItem.Key)
+                    @if (JsonHelper.IsShowComma(Json, jsonItem))
                     {
                         <span>,</span>
                     }
 
                     @if (this.AllowEdit)
                     {
-                        <JsonItemEditor JsonObject="Json" JsonObjectChanged="@ValueUpdated" KeyValues="KeyValues"
-                                        JsonItemToEdit="jsonItem" Component="CustomEditor">
+                        <JsonItemEditor JsonObject="Json" 
+                                        JsonObjectChanged="@ValueUpdated" 
+                                        KeyValues="KeyValues"
+                                        JsonItemToEdit="jsonItem" 
+                                        Component="CustomEditor">
                         </JsonItemEditor>
                     }
                 </div>

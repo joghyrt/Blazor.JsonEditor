@@ -13,13 +13,24 @@ namespace Blazor.JsonEditor.Component
 {
     public partial class JsonEditor
     {
-        [Parameter] public Dictionary<string, string>? KeyValues { get; set; }
-        [Parameter] public Expression<Func<string?>>? ValidationFor { get; set; }
-        [Parameter] public string? FieldName { get; set; }
+        [Parameter] 
+        public Dictionary<string, string>? KeyValues { get; set; }
+        [Parameter] 
+        public Expression<Func<string?>>? ValidationFor { get; set; }
+        [Parameter] 
+        public string? FieldName { get; set; }
 
-        [Parameter] public bool AllowEdit { get; set; } = true;
+        [Parameter] 
+        public bool AllowEdit { get; set; } = true;
+
+        [Parameter] 
+        public Type? CustomEditor { get; set; }
         
-        [Parameter] public Type? CustomEditor { get; set; }
+        [Parameter] 
+        public Type? CustomItemView { get; set; }
+        
+        [Parameter] 
+        public Type? CustomObjectView { get; set; }
 
         private JsonObject? Json { get; set; }
 
@@ -33,7 +44,8 @@ namespace Blazor.JsonEditor.Component
             await base.OnParametersSetAsync();
         }
 
-        protected override bool TryParseValueFromString(string value, out string? result, out string? validationErrorMessage)
+        protected override bool TryParseValueFromString(string value, out string? result,
+            out string? validationErrorMessage)
         {
             result = value;
             validationErrorMessage = null;
@@ -57,7 +69,7 @@ namespace Blazor.JsonEditor.Component
             {
                 return;
             }
-            
+
             Json[prop] = JsonNode.Parse(value);
             TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
             ValueChanged.InvokeAsync(JsonObjectString);
@@ -71,7 +83,7 @@ namespace Blazor.JsonEditor.Component
             {
                 return;
             }
-            
+
             Json.Remove(prop);
             TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
             ValueChanged.InvokeAsync(JsonObjectString);

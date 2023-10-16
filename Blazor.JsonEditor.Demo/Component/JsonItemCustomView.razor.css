@@ -1,0 +1,26 @@
+﻿.json-property-name {
+    padding: 3px;
+    color: brown;
+}
+
+.json-content {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.json-value-content {
+    padding: 3px;
+    font-style: italic;
+}
+
+.json-value-string {
+    color: darkgoldenrod;
+}
+
+.json-value-number {
+    color: blueviolet;
+}
+
+.json-value-array {
+    color: darkgreen;
+}

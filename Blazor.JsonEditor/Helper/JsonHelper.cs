@@ -117,5 +117,15 @@ namespace Blazor.JsonEditor.Helper
                 }
             }
         }
+        
+        internal static bool IsShowComma(JsonObject json, KeyValuePair<string, JsonNode?> jsonItem)
+        {
+            if (json == null)
+            {
+                return false;
+            }
+
+            return !json.LastOrDefault().Key.Equals(jsonItem.Key);
+        }
     }
 }

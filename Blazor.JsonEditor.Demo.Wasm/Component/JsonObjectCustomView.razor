@@ -1,0 +1,16 @@
+﻿@using Blazor.JsonEditor.Component
+
+<span class="json-property-name">"@JsonItem.Key"</span>
+<span>♚</span>
+<span>
+    <span>｛</span>
+    <InternalJsonEditor Value="@JsonItem.Value.ToJsonString()"
+                        ValueChanged="ValueChanged" 
+                        KeyValues="KeyValues" 
+                        AllowEdit="AllowEdit" 
+                        CustomEditor="CustomEditor"
+                        CustomItemView="CustomItemView"
+                        CustomObjectView="CustomObjectView">
+    </InternalJsonEditor>
+    <span>}</span>
+</span>
