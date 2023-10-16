@@ -1,5 +1,6 @@
 # Blazor.JsonEditor
-Json Editor and Viewer for Blazor Server App and Wasm. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
+
+JSON Editor and Viewer ( with customization) for Blazor Server App and Wasm. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
 
 ## Demo:
 
@@ -16,12 +17,12 @@ This will install Blazor.JsonEditor in your project. You also need to add in **_
 ```html
 @using Blazor.JsonEditor.Component
 ```
-Also, you need to add javascript file in _Host.cshtml ( Server app) or index.html ( Wasm)  file:
+Also, you need to add a javascript file in _Host.cshtml ( Server app) or index.html ( Wasm)  file:
 
 ```html
 <script src="_content/Blazor.JsonEditor/Blazor.JsonEditor.js"></script>
 ```
-For icons suppor JsonEditor uses Font-Awesome icons library. You need to add link to _Host.cshtml ( Server app) or index.html ( Wasm) file:
+For icon support, JsonEditor uses the Font-Awesome icons library. You need to add a link to _Host.cshtml ( Server app) or index.html ( Wasm) file:
 ```html
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
 ```
@@ -76,7 +77,7 @@ public Dictionary<string, string>? KeyValues { get; set; }
 public KeyValuePair<string, JsonNode?>? JsonItemToEdit { get; set; }
 ```
 
-Also on add and edit you need to pass data to **JsonHelper**. We have two methods for this: AddNodeValue and EditNodeValue
+Also on add and edit, you need to pass data to **JsonHelper**. We have two methods for this: AddNodeValue and EditNodeValue
 
 ```c#
 public static void AddNodeValue(JsonObject jsonObject, JsonItem jsonItem)
@@ -92,7 +93,7 @@ await JsonObjectChanged.InvokeAsync(JsonObject);
 
 ## View templates:
 
-You can customize view template for an item and an object. Item is key: value template. Object view template is an object template that contains a lot of items template in it.
+You can customize the view template for an item and an object. Item is key: value template. An object view template is an object template that contains a lot of items template in it.
 
 ```json
 {
@@ -128,7 +129,7 @@ In your custom component you need to have parameters:
 public KeyValuePair<string, JsonNode?> JsonItem { get; set; }
 ```
 
-You can find example in repository.
+You can find an example in [repository](https://github.com/joghyrt/Blazor.JsonEditor/tree/main/Blazor.JsonEditor.Demo.Wasm/Component).
 
 ### Object view template:
 
@@ -178,7 +179,7 @@ Example:
 </InternalJsonEditor>
 ```
 
-You can find example in repository.
+You can find an example in [repository](https://github.com/joghyrt/Blazor.JsonEditor/tree/main/Blazor.JsonEditor.Demo.Wasm/Component).
 
 ## Next steps
 
