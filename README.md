@@ -1,9 +1,9 @@
 # Blazor.JsonEditor
 Json Editor and Viewer for Blazor Server App and Wasm. Rewrited and working version of **[Blazoring.JsonEditor](https://github.com/vmakharashvili/Blazoring-JsonEditor)** 
 
-### Demo:
+## Demo:
 
-[Click me to see the demo](https://652becd3fdf12174a73f784c--cheerful-madeleine-b2bcad.netlify.app/)
+[Click me to see the demo](https://652d69a95eff6137d8c4e6f8--cool-pasca-c1252e.netlify.app/)
 
 ## Json Editor and Viewer tool
 
@@ -44,7 +44,7 @@ For icons suppor JsonEditor uses Font-Awesome icons library. You need to add lin
 
 Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
 
-## Customization
+# Customization
 
 ## Editor template:
 
@@ -90,20 +90,106 @@ After Add/Edit/Delete do not forget to Invoke JsonObjectChanged
 await JsonObjectChanged.InvokeAsync(JsonObject);
 ```
 
+## View templates:
+
+You can customize view template for an item and an object. Item is key: value template. Object view template is an object template that contains a lot of items template in it.
+
+```json
+{
+  "Nullable" : null, //item view template
+  "String" : "random", //item view template
+  "Number" : 1, //item view template
+  "Array" : [1,2,3], //item view template
+  "True" : true, //item view template
+  "False" : false, //item view template
+  "Object" : { //!OBJECT! view template
+    "Nullable" : null, //item view template
+    "String" : "random", //item view template
+    "Number" : 1, //item view template
+    "Array" : [1,2,3], //item view template
+    "True" : true, //item view template
+    "False" : false //item view template
+  }
+}
+```
+
+### Item view template:
+
+```html
+<EditForm Model="DemoJson">
+    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomItemView="typeof(JsonItemCustomView)"></JsonEditor>
+</EditForm>
+```
+
+In your custom component you need to have parameters:
+
+```c#
+[Parameter]
+public KeyValuePair<string, JsonNode?> JsonItem { get; set; }
+```
+
+You can find example in repository.
+
+### Object view template:
+
+```html
+<EditForm Model="DemoJson">
+    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomObjectView="typeof(JsonObjectCustomView)"></JsonEditor>
+</EditForm>
+```
+
+In your custom component you need to have parameters:
+
+```c#
+[Parameter]
+        public KeyValuePair<string, JsonNode?> JsonItem { get; set; }
+        
+        [Parameter]
+        public EventCallback<string?> ValueChanged { get; set; }
+
+        [Parameter]
+        public Dictionary<string, string>? KeyValues { get; set; }
+        
+        [Parameter] 
+        public bool AllowEdit { get; set; } = true;
+        
+        [Parameter] 
+        public Type? CustomEditor { get; set; }
+        
+        [Parameter] 
+        public Type? CustomItemView { get; set; }
+        
+        [Parameter] 
+        public Type? CustomObjectView { get; set; }
+```
+
+Don't forget to include **InternalJsonEditor** inside you custom template to allow build lower object level.
+
+Example:
+
+```html
+<InternalJsonEditor Value="@JsonItem.Value.ToJsonString()"
+                    ValueChanged="ValueChanged"
+                    KeyValues="KeyValues"
+                    AllowEdit="AllowEdit"
+                    CustomEditor="CustomEditor"
+                    CustomItemView="CustomItemView"
+                    CustomObjectView="CustomObjectView">
+</InternalJsonEditor>
+```
+
+You can find example in repository.
+
 ## Next steps
 
-- Add availability to have customer template for item and object properties
 - Refactor
 
 ## If you like it please support:
-
-### Buy me a coffee
 
 [Buy me a coffee](https://www.buymeacoffee.com/joghyrt)
 
 <img width="120" alt="bmc_qr" src="https://github.com/joghyrt/Blazor.JsonEditor/assets/26901105/d914e23c-dc90-483b-98df-e977c6662672">
 
-### Ko-fi
 
 [Donate](https://ko-fi.com/joghyrt) 
 
