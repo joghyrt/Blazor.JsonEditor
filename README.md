@@ -8,7 +8,7 @@ JSON Editor and Viewer ( with customization) for Blazor Server App and Wasm. Rew
 
 ## Json Editor and Viewer tool
 
-* To install the package run following command:
+* To install the package run the following command:
 
 **`Install-Package Blazor.JsonEditor`**
 or search **Blazor.JsonEditor** in Nuget gallery.
@@ -31,7 +31,10 @@ For icon support, JsonEditor uses the Font-Awesome icons library. You need to ad
 
 ```html
 <EditForm Model="DemoJson">
-    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)"></JsonEditor>
+    <JsonEditor @bind-Value="DemoJson.Json"
+                FieldName="@nameof(IndexModel.Json)"
+                ValidationFor="@(() => DemoJson.Json)">
+    </JsonEditor>
 </EditForm>
 ```
 
@@ -39,7 +42,11 @@ For icon support, JsonEditor uses the Font-Awesome icons library. You need to ad
 
 ```html
 <EditForm Model="DemoJson">
-    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" AllowEdit="false"></JsonEditor>
+    <JsonEditor @bind-Value="DemoJson.Json"
+                FieldName="@nameof(IndexModel.Json)"
+                ValidationFor="@(() => DemoJson.Json)"
+                AllowEdit="false">
+    </JsonEditor>
 </EditForm>
 ```
 
@@ -49,11 +56,15 @@ Blazor.JsonEditor doesn't work without EditForm. Also, validation is required.
 
 ## Editor template:
 
-You can customize and pass your own editor template as dynamic component. Editor template is everything that you see after property name and value like buttons and editor window itself. For this you need to set parameter CustomEditor. As an example **CustomEditor="typeof([JsonItemCustomEditor](https://github.com/joghyrt/Blazor.JsonEditor/tree/main/Blazor.JsonEditor.Demo/Component))"**
+You can customize and pass your own editor template as a dynamic component. The editor template is everything that you see after the property name and value like buttons and the editor window itself. For this, you need to set the parameter CustomEditor. As an example **CustomEditor="typeof([JsonItemCustomEditor](https://github.com/joghyrt/Blazor.JsonEditor/tree/main/Blazor.JsonEditor.Demo/Component))"**
 
 ```html
 <EditForm Model="DemoJson">
-    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomEditor="typeof(JsonItemCustomEditor)"></JsonEditor>
+    <JsonEditor @bind-Value="DemoJson.Json"
+                FieldName="@nameof(IndexModel.Json)"
+                ValidationFor="@(() => DemoJson.Json)"
+                CustomEditor="typeof(JsonItemCustomEditor)">
+    </JsonEditor>
 </EditForm>
 ```
 
@@ -118,7 +129,11 @@ You can customize the view template for an item and an object. Item is key: valu
 
 ```html
 <EditForm Model="DemoJson">
-    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomItemView="typeof(JsonItemCustomView)"></JsonEditor>
+    <JsonEditor @bind-Value="DemoJson.Json"
+                FieldName="@nameof(IndexModel.Json)"
+                ValidationFor="@(() => DemoJson.Json)"
+                CustomItemView="typeof(JsonItemCustomView)">
+    </JsonEditor>
 </EditForm>
 ```
 
@@ -135,7 +150,11 @@ You can find an example in [repository](https://github.com/joghyrt/Blazor.JsonEd
 
 ```html
 <EditForm Model="DemoJson">
-    <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomObjectView="typeof(JsonObjectCustomView)"></JsonEditor>
+    <JsonEditor @bind-Value="DemoJson.Json"
+                FieldName="@nameof(IndexModel.Json)"
+                ValidationFor="@(() => DemoJson.Json)"
+                CustomObjectView="typeof(JsonObjectCustomView)">
+    </JsonEditor>
 </EditForm>
 ```
 
