@@ -38,10 +38,6 @@ namespace Blazor.JsonEditor.Component.Viewer.Item
             JsonItem = new KeyValuePair<string, JsonNode?>(JsonItem.Key, jsonValue);
 
             ValueChanged.InvokeAsync(JsonItem.Value.ToJsonString());
-            
-            // // this.JsonObject[prop] = JsonNode.Parse(value);
-            // // this.JsonObjectChanged.InvokeAsync(JsonObject.ToJsonString());
-            // this.StateHasChanged();
         }
     }
 }
