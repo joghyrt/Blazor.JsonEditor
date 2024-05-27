@@ -10,6 +10,9 @@ namespace Blazor.JsonEditor.Demo.Component
         public KeyValuePair<string, JsonNode?> JsonItem { get; set; }
         
         [Parameter]
+        public JsonObject? JsonObject { get; set; }
+        
+        [Parameter]
         public EventCallback<string?> ValueChanged { get; set; }
 
         [Parameter]
@@ -26,7 +29,6 @@ namespace Blazor.JsonEditor.Demo.Component
         
         [Parameter] 
         public Type? CustomObjectView { get; set; }
-        
     }
 }
 

@@ -19,10 +19,10 @@
         <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)"></JsonEditor>
     </EditForm>
 </section>
-<section class="section-container">
-    <h4>Json Editor with custom components</h4>
-    <span>Here we use custom Edit template for Json node and customer view template for Item and Object. You can create your own component and use it as editor template. More information in documentation <a href="https://github.com/joghyrt/Blazor.JsonEditor" target="_blank">here</a></span>
-    <EditForm Model="DemoJson">
-        <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomEditor="typeof(JsonItemCustomEditor)"  CustomItemView="typeof(JsonItemCustomView)" CustomObjectView="typeof(JsonObjectCustomView)"></JsonEditor>
-    </EditForm>
-</section>
+@* <section class="section-container"> *@
+@*     <h4>Json Editor with custom components</h4> *@
+@*     <span>Here we use custom Edit template for Json node and customer view template for Item and Object. You can create your own component and use it as editor template. More information in documentation <a href="https://github.com/joghyrt/Blazor.JsonEditor" target="_blank">here</a></span> *@
+@*     <EditForm Model="DemoJson"> *@
+@*         <JsonEditor @bind-Value="DemoJson.Json" FieldName="@nameof(IndexModel.Json)" ValidationFor="@(() => DemoJson.Json)" CustomEditor="typeof(JsonItemCustomEditor)"  CustomItemView="typeof(JsonItemCustomView)" CustomObjectView="typeof(JsonObjectCustomView)"></JsonEditor> *@
+@*     </EditForm> *@
+@* </section> *@

@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Text.Json.Nodes;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Nodes;
+using Blazor.JsonEditor.Model;
 
 namespace Blazor.JsonEditor.Component
 {

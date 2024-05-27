@@ -1,5 +1,4 @@
 ﻿@using System.Text.Json
-@using Blazor.JsonEditor.Helper
 
 
 <button type="button" @onclick="@(() => ToggleEditor())" class="json-button">
@@ -51,12 +50,28 @@
                 </div>
             </div>
             <div>
-                @if (JsonItem.ValueKind != JsonValueKind.Undefined)
+                @if (JsonItem.ValueKind != JsonValueKind.Undefined && JsonItem.ValueKind != JsonValueKind.Array)
                 {
                     <label>Value:</label>
                 }
-                @if (JsonItem.ValueKind == JsonValueKind.String || JsonItem.ValueKind == JsonValueKind.Array)
+                @if (JsonItem.ValueKind == JsonValueKind.String)
                 {
+                    <InputText @bind-Value="JsonItem.Value" class="json-input-text"/>
+                    <ValidationMessage For="@(() => JsonItem.Value)"/>
+                }
+                else if(JsonItem.ValueKind == JsonValueKind.Array)
+                {
+                    <div class="p-2">
+                        <label>Array Type</label>
+                        <InputSelect TValue="JsonValueKind" @bind-Value="JsonItem.ArrayType" class="json-input-text">
+                            <option value="@JsonValueKind.String">String</option>
+                            <option value="@JsonValueKind.Number">Number</option>
+                            <option value="@JsonValueKind.Object">Object</option>
+                            <option value="@JsonValueKind.True">Boolean</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(() => JsonItem.ArrayType)"/>
+                    </div>
+                    
                     <InputText @bind-Value="JsonItem.Value" class="json-input-text"/>
                     <ValidationMessage For="@(() => JsonItem.Value)"/>
                 }
@@ -96,7 +111,7 @@
 @if (JsonItemToEdit != null)
 {
     <span>
-        <button type="button" class="json-button json-button-danger" @onclick="RemoveNode">
+        <button type="button" class="json-button json-button-danger" @onclick="RemoveNodeAsync">
             <i class="fas fa-times"></i>
         </button>
     </span>

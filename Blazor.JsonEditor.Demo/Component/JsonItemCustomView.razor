@@ -1,5 +1,7 @@
 ﻿@using System.Text.Json
+@using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
+@using Blazor.JsonEditor.Component
 
 @if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonValueKind.Number, JsonValueKind.True, JsonValueKind.False }))
 {
@@ -22,6 +24,48 @@ else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonVa
 else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonValueKind.Array }))
 {
     <span class="json-property-name">"@JsonItem.Key"</span>
-    <span>♦</span>
-    <span class="json-value-content json-value-array">@JsonItem.Value.ToJsonString()</span>
+    <span>:</span>
+
+    var isObjectArray = JsonItem.Value.AsArray().Any() && JsonItem.Value.AsArray().First() is JsonObject;
+
+    if (isObjectArray)
+    {
+        <span> [</span>
+        <br/>
+        var jsonArray = JsonItem.Value.AsArray();
+        var latestValue = jsonArray.Last();
+        for (var i = 0; i < jsonArray.Count; i++)
+        {
+            var value = jsonArray[i];
+            var index = i;
+            <span>
+                <span>{</span>
+                <InternalJsonEditor Value="@value.ToJsonString()"
+                                    ValueChanged="@(e => JsonObjectUpdated(index, e))"
+                                    KeyValues="KeyValues"
+                                    AllowEdit="AllowEdit"
+                                    CustomEditor="CustomEditor"
+                                    CustomItemView="CustomItemView"
+                                    CustomObjectView="CustomObjectView">
+                </InternalJsonEditor>
+                @if (value.Equals(latestValue))
+                {
+                    <span>}</span>
+                }
+                else
+                {
+                    <span>},</span>
+                }
+                <br/>
+            </span>
+        }
+        
+            
+
+        <span>]</span>
+    }
+    else
+    {
+        <span class="json-value-content json-value-array">@JsonItem.Value.ToJsonString()</span>
+    }
 }

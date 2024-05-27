@@ -1,7 +1,4 @@
-﻿@using System.Text.Json
-@using System.Linq.Expressions
-@using System.Text.Json.Nodes
-@using Blazor.JsonEditor.Helper
+﻿@using Blazor.JsonEditor.Helper
 @using Blazor.JsonEditor.Component.Editor
 @using Blazor.JsonEditor.Component.Viewer.Object
 @using Blazor.JsonEditor.Component.Viewer.Item
@@ -19,7 +16,13 @@
                 <div>
                     @if (!JsonHelper.IsObjectValueKind(jsonItem))
                     {
-                        <JsonItemView JsonItem="jsonItem" Component="CustomItemView"></JsonItemView>
+                        <JsonItemView AllowEdit="AllowEdit"
+                                      CustomEditor="CustomEditor"
+                                      JsonItem="jsonItem"
+                                      KeyValues="KeyValues"
+                                      ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))"
+                                      Component="CustomObjectView"
+                                      CustomItemView="CustomItemView"></JsonItemView>
                     }
                     else
                     {
