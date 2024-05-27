@@ -47,11 +47,24 @@ namespace Blazor.JsonEditor.Helper
                 case JsonValueKind.Object:
                     jsonObject[editPropertyName] = new JsonObject();
                     break;
-                case JsonValueKind.Array when !string.IsNullOrEmpty(jsonItem.Value):
+                case JsonValueKind.Array when !jsonItem.ArrayType.Equals(JsonValueKind.Object):
                 {
                     List<JsonNode> nodeArray = jsonItem.Value.Split(',').Select(x => JsonNode.Parse(x)).ToList();
 
                     jsonObject[editPropertyName] = new JsonArray(nodeArray.ToArray());
+                    break;
+                }
+                case JsonValueKind.Array when jsonItem.ArrayType.Equals(JsonValueKind.Object): 
+                {
+                    var document = JsonDocument.Parse($"[{jsonItem.Value}]"); 
+
+                    var jsonArray = new JsonArray();
+                    foreach (var element in document.RootElement.EnumerateArray())
+                    {
+                        jsonArray.Add(JsonNode.Parse(element.GetRawText()));
+                    }
+
+                    jsonObject[editPropertyName] = jsonArray;
                     break;
                 }
                 case JsonValueKind.True when jsonItem.Value != null:

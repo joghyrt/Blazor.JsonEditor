@@ -32,13 +32,16 @@ else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonVa
     {
         <span> [</span>
         <br/>
-        var latestValue = JsonItem.Value.AsArray().Last();
-        foreach (var value in JsonItem.Value.AsArray())
+        var jsonArray = JsonItem.Value.AsArray();
+        var latestValue = jsonArray.Last();
+        for (var i = 0; i < jsonArray.Count; i++)
         {
+            var value = jsonArray[i];
+            var index = i;
             <span>
                 <span>{</span>
                 <InternalJsonEditor Value="@value.ToJsonString()"
-                                    ValueChanged="ValueChanged"
+                                    ValueChanged="@(e => JsonObjectUpdated(index, e))"
                                     KeyValues="KeyValues"
                                     AllowEdit="AllowEdit"
                                     CustomEditor="CustomEditor"
@@ -56,6 +59,8 @@ else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonVa
                 <br/>
             </span>
         }
+        
+            
 
         <span>]</span>
     }

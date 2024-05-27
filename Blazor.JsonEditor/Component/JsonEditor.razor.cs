@@ -66,26 +66,7 @@ namespace Blazor.JsonEditor.Component
                 return;
             }
 
-            var jsonObjectValue = Json.FirstOrDefault(x => x.Key.Equals(prop)).Value;
-
-            var jsonElement = new JsonElement();
-            var objectType = JsonValueKind.Object;
-            if (jsonObjectValue != null)
-            {
-                jsonElement = JsonSerializer.Deserialize<JsonElement>(jsonObjectValue.ToJsonString());
-                objectType = jsonElement.ValueKind;
-            }
-
-            if (objectType.Equals(JsonValueKind.Object))
-            {
-                UpdateObject(prop, value);
-            }
-            else
-            {
-                UpdateObjectsArray();
-            }
-
-            
+            Json[prop] = JsonNode.Parse(value);
             TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
             ValueChanged.InvokeAsync(JsonObjectString);
             EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
@@ -94,7 +75,6 @@ namespace Blazor.JsonEditor.Component
 
         private void UpdateObject(string prop, string value)
         {
-            Json[prop] = JsonNode.Parse(value);
             
         }
         

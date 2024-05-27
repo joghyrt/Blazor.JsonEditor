@@ -28,6 +28,21 @@ namespace Blazor.JsonEditor.Component.Viewer.Item
         
         [Parameter] 
         public Type? CustomObjectView { get; set; }
+        
+        private void JsonObjectUpdated(int index, string value)
+        {
+            var jsonValue = JsonItem.Value as JsonArray;
+
+            jsonValue[index] = JsonNode.Parse(value);
+            
+            JsonItem = new KeyValuePair<string, JsonNode?>(JsonItem.Key, jsonValue);
+
+            ValueChanged.InvokeAsync(JsonItem.Value.ToJsonString());
+            
+            // // this.JsonObject[prop] = JsonNode.Parse(value);
+            // // this.JsonObjectChanged.InvokeAsync(JsonObject.ToJsonString());
+            // this.StateHasChanged();
+        }
     }
 }
 
