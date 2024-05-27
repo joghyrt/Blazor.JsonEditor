@@ -14,7 +14,13 @@
             <div>
                 @if (!JsonHelper.IsObjectValueKind(jsonItem))
                 {
-                    <JsonItemView JsonItem="jsonItem" Component="CustomItemView"></JsonItemView>
+                    <JsonItemView AllowEdit="AllowEdit"
+                                  CustomEditor="CustomEditor"
+                                  JsonItem="jsonItem"
+                                  KeyValues="KeyValues"
+                                  ValueChanged="@(e => JsonObjectUpdated(jsonItem.Key, e))"
+                                  Component="CustomObjectView"
+                                  CustomItemView="CustomItemView"></JsonItemView>
                 }
                 else
                 {

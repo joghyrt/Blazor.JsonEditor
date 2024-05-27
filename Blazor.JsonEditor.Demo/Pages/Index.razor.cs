@@ -6,8 +6,11 @@ namespace Blazor.JsonEditor.Demo.Pages
     {
         private IndexModel DemoJson { get; set; } = new()
         {
+            // Json =
+            //     "{\"Nullable\": null, \"String\": \"random\", \"Number\": 1, \"Array\": [1,2,3], \"True\": true, \"False\": false, \"Object\": { \"Nullable\": null, \"String\": \"random\", \"Number\": 1, \"Array\": [1,2,3], \"True\": true, \"False\": false, \"ObjectsArray\": [ { \"Name\":\"First Object\", \"Property\": 1}, {\"Name\":\"Second Object\", \"Property\": 1}]}}"
             Json =
-                "{\"Nullable\": null, \"String\": \"random\", \"Number\": 1, \"Array\": [1,2,3], \"True\": true, \"False\": false, \"Object\": { \"Nullable\": null, \"String\": \"random\", \"Number\": 1, \"Array\": [1,2,3], \"True\": true, \"False\": false } }"
+                "{\"Object\": {}, \"ObjectsArray\": [ { \"Name\":\"First Object\", \"Property\": 1}, {\"Name\":\"Second Object\", \"Property\": 1}]}"
+            
         };
     }
 }

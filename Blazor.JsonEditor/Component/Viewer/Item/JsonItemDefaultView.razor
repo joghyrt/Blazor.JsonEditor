@@ -1,4 +1,5 @@
 ﻿@using System.Text.Json
+@using System.Text.Json.Nodes
 @using Blazor.JsonEditor.Helper
 
 
@@ -24,5 +25,42 @@ else if (JsonHelper.IsInJsonValueKind(JsonItem, new List<JsonValueKind> { JsonVa
 {
     <span class="json-property-name">"@JsonItem.Key"</span>
     <span>:</span>
-    <span class="json-value-content json-value-array">@JsonItem.Value.ToJsonString()</span>
+
+    var isObjectArray = JsonItem.Value.AsArray().Any() && JsonItem.Value.AsArray().First() is JsonObject;
+
+    if (isObjectArray)
+    {
+        <span> [</span>
+        <br/>
+        var latestValue = JsonItem.Value.AsArray().Last();
+        foreach (var value in JsonItem.Value.AsArray())
+        {
+            <span>
+                <span>{</span>
+                <InternalJsonEditor Value="@value.ToJsonString()"
+                                    ValueChanged="ValueChanged"
+                                    KeyValues="KeyValues"
+                                    AllowEdit="AllowEdit"
+                                    CustomEditor="CustomEditor"
+                                    CustomItemView="CustomItemView"
+                                    CustomObjectView="CustomObjectView">
+                </InternalJsonEditor>
+                @if (value.Equals(latestValue))
+                {
+                    <span>}</span>
+                }
+                else
+                {
+                    <span>},</span>
+                }
+                <br/>
+            </span>
+        }
+
+        <span>]</span>
+    }
+    else
+    {
+        <span class="json-value-content json-value-array">@JsonItem.Value.ToJsonString()</span>
+    }
 }

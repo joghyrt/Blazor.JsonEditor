@@ -44,9 +44,11 @@ namespace Blazor.JsonEditor.Component.Editor
         protected override void OnParametersSet()
         {
             JsonItem = new JsonItem();
+            
             if (JsonItemToEdit == null)
             {
                 JsonItem.ValueKind = JsonValueKind.Undefined;
+                JsonItem.ArrayType = JsonValueKind.String;
                 return;
             }
 
@@ -91,6 +93,15 @@ namespace Blazor.JsonEditor.Component.Editor
                 {
                     var arrayValue = jsonElement.ToString();
                     JsonItem.Value = arrayValue.Substring(1, arrayValue.Length - 2);
+                    
+                    var firstElement = jsonElement.EnumerateArray().FirstOrDefault();
+                    if (firstElement.ValueKind == JsonValueKind.Undefined)
+                    {
+                        JsonItem.ValueKind = JsonValueKind.Undefined;
+                        break;
+                    }
+                    
+                    JsonItem.ArrayType = firstElement.ValueKind;
                     break;
                 }
                 case JsonValueKind.Null:
@@ -165,7 +176,7 @@ namespace Blazor.JsonEditor.Component.Editor
             JsonHelper.EditNodeValue(JsonObject, JsonItem, JsonItemToEdit.Value.Key);
         }
         
-        private async Task RemoveNode()
+        private async Task RemoveNodeAsync()
         {
             if (this.JsonObject == null)
             {

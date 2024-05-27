@@ -9,12 +9,15 @@ namespace Blazor.JsonEditor.Model
             JsonValueKind.Object, JsonValueKind.Array, JsonValueKind.True)]
         public string? PropertyName { get; set; }
 
-        [RequiredIf(nameof(JsonItem.ValueKind), JsonValueKind.String, JsonValueKind.Array, JsonValueKind.False,
+        [RequiredIf(nameof(JsonItem.ValueKind), JsonValueKind.String, JsonValueKind.False,
             JsonValueKind.Null, JsonValueKind.True)]
         public string? Value { get; set; }
 
         [RequiredIf(nameof(JsonItem.ValueKind), JsonValueKind.Number)]
         public double? NumericValue { get; set; }
+        
+        [RequiredIf(nameof(JsonItem.ValueKind), JsonValueKind.Array)]
+        public JsonValueKind ArrayType { get; set; }
 
         public JsonValueKind ValueKind { get; set; }
     }

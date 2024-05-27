@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Text.Json.Nodes;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Nodes;
+using Blazor.JsonEditor.Model;
 
 namespace Blazor.JsonEditor.Component
 {
@@ -70,11 +66,41 @@ namespace Blazor.JsonEditor.Component
                 return;
             }
 
-            Json[prop] = JsonNode.Parse(value);
+            var jsonObjectValue = Json.FirstOrDefault(x => x.Key.Equals(prop)).Value;
+
+            var jsonElement = new JsonElement();
+            var objectType = JsonValueKind.Object;
+            if (jsonObjectValue != null)
+            {
+                jsonElement = JsonSerializer.Deserialize<JsonElement>(jsonObjectValue.ToJsonString());
+                objectType = jsonElement.ValueKind;
+            }
+
+            if (objectType.Equals(JsonValueKind.Object))
+            {
+                UpdateObject(prop, value);
+            }
+            else
+            {
+                UpdateObjectsArray();
+            }
+
+            
             TryParseValueFromString(Json.ToJsonString(), out string? JsonObjectString, out string? vm);
             ValueChanged.InvokeAsync(JsonObjectString);
             EditContext.NotifyFieldChanged(new FieldIdentifier(EditContext.Model, FieldName));
             StateHasChanged();
+        }
+
+        private void UpdateObject(string prop, string value)
+        {
+            Json[prop] = JsonNode.Parse(value);
+            
+        }
+        
+        private void UpdateObjectsArray()
+        {
+            
         }
 
         private void RemoveValue(string prop)
