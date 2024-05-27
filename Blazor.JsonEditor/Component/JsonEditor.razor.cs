@@ -73,16 +73,6 @@ namespace Blazor.JsonEditor.Component
             StateHasChanged();
         }
 
-        private void UpdateObject(string prop, string value)
-        {
-            
-        }
-        
-        private void UpdateObjectsArray()
-        {
-            
-        }
-
         private void RemoveValue(string prop)
         {
             if (Json == null)
