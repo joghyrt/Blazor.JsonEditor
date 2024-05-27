@@ -13,7 +13,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReleaseNotes>Item view and object view customization added</PackageReleaseNotes>
-    <Version>1.0.9</Version>
+    <Version>1.1.0</Version>
     <PackageProjectUrl>https://github.com/joghyrt/Blazor.JsonEditor</PackageProjectUrl>
   </PropertyGroup>
 
