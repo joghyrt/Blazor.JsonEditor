@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using Blazor.JsonEditor.Helper;
 using Blazor.JsonEditor.Model;
@@ -73,7 +74,7 @@ namespace Blazor.JsonEditor.Demo.Component
                     JsonItem.Value = jsonElement.ToString();
                     break;
                 case JsonValueKind.Number:
-                    if (!double.TryParse(jsonElement.ToString(), out var numericValue))
+                    if (!double.TryParse(jsonElement.ToString(), CultureInfo.InvariantCulture, out var numericValue))
                     {
                         throw new ArgumentException($"Not able to parse value {jsonElement.ToString()} to double.");
                     }
